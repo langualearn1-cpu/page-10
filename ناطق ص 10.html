@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدرس الناطق التفاعلي: المفردات ومعانيها بالإنجليزية - Langua Learn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --font-ar: 'Cairo', sans-serif;
+            --font-en: 'Fredoka', sans-serif;
+        }
+        body {
+            font-family: var(--font-ar);
+            background: radial-gradient(circle at top right, #fffbeb 0%, #f0f9ff 45%, #fdf2f8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .en-font {
+            font-family: var(--font-en);
+            direction: ltr;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8), 0 12px 28px -6px rgba(15, 23, 42, 0.28); transform: translateY(-4px) scale(1.015); }
+            50% { box-shadow: 0 0 0 8px rgba(250, 204, 21, 0.45), 0 18px 34px -6px rgba(15, 23, 42, 0.35); transform: translateY(-6px) scale(1.025); }
+        }
+        .card-speaking {
+            animation: pulseGlow 1.6s infinite ease-in-out;
+            outline: 4px solid #facc15;
+            z-index: 20;
+        }
+        .speaking-highlight {
+            background-color: #fef08a !important;
+            color: #0f172a !important;
+            padding: 2px 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(250, 204, 21, 0.5);
+            transition: all 0.2s ease;
+        }
+        .word-token {
+            display: inline-block;
+            padding: 1px 4px;
+            border-radius: 6px;
+            transition: all 0.18s ease;
+            cursor: pointer;
+        }
+        .word-token:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-1px);
+        }
+        .word-token-active {
+            background-color: #fef08a !important;
+            color: #1e293b !important;
+            font-weight: 700;
+            transform: scale(1.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        /* Soundizer bars animation */
+        @keyframes soundBar {
+            0%, 100% { height: 5px; }
+            50% { height: 18px; }
+        }
+        .sound-wave span {
+            display: inline-block;
+            width: 3.5px;
+            background-color: currentColor;
+            border-radius: 999px;
+            animation: soundBar 0.7s infinite ease-in-out;
+        }
+        .sound-wave span:nth-child(2) { animation-delay: 0.15s; }
+        .sound-wave span:nth-child(3) { animation-delay: 0.3s; }
+        .sound-wave span:nth-child(4) { animation-delay: 0.45s; }
+
+        /* Floating illustration gentle bobbing */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        .illus-float {
+            animation: floatSlow 3.4s ease-in-out infinite;
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-16">
+
+    <header class="no-print sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-indigo-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand & Teacher Credit -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-700 via-indigo-600 to-amber-500 text-white flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-volume-high text-2xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <h1 class="text-lg sm:text-xl font-black text-slate-900">الدرس الناطق التفاعلي: المفردات <span class="en-font text-indigo-600">(VOCABULARY)</span></h1>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full border border-amber-300">14 مفردة + المعنى بالإنجليزية</span>
+                    </div>
+                    <p class="text-xs font-bold text-slate-500">إعداد المعلم ماجد السويهري • <span class="en-font text-purple-700 font-semibold">LANGUA LEARN (Learn, Grow, Succeed)</span></p>
+                </div>
+            </div>
+
+            <!-- Global Audio & Lesson Controls -->
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Auto-Play Lesson Button -->
+                <button onclick="toggleAutoPlayLesson()" id="btn-autoplay" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-circle-play text-base"></i>
+                    <span>تشغيل الدرس الناطق كاملاً</span>
+                </button>
+
+                <!-- Reading Mode Selector -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
+                    <button onclick="setReadMode('both')" id="rm-both" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white transition" title="قراءة الكلمة ثم قراءة معناها باللغة الإنجليزية">
+                        الكلمة + المعنى EN
+                    </button>
+                    <button onclick="setReadMode('meaning')" id="rm-meaning" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition" title="قراءة المعنى باللغة الإنجليزية فقط">
+                        المعنى EN فقط
+                    </button>
+                    <button onclick="setReadMode('word')" id="rm-word" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition" title="قراءة الكلمة فقط">
+                        الكلمة فقط
+                    </button>
+                </div>
+
+                <!-- Speech Speed Toggle -->
+                <button onclick="cycleSpeechRate()" id="btn-speed" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-amber-50 border-2 border-amber-300 text-amber-900 hover:bg-amber-100 transition flex items-center gap-1.5" title="سرعة القراءة الصوتية">
+                    <i class="fa-solid fa-gauge-high text-amber-600"></i>
+                    <span id="speed-label">السرعة: هادئة تعليمية (0.76x)</span>
+                </button>
+
+                <!-- Stop Speech Button -->
+                <button onclick="stopAllSpeech()" class="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 transition" title="إيقاف الصوت">
+                    <i class="fa-solid fa-stop"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 mt-6">
+
+        <!-- Calm Educational Voice Studio Bar -->
+        <div class="no-print mb-4 bg-white/90 backdrop-blur rounded-2xl p-3 sm:px-5 shadow-sm border-2 border-teal-200/80 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-base shadow-inner">
+                    <i class="fa-solid fa-headphones-simple"></i>
+                </span>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs sm:text-sm font-black text-slate-800">نمط الصوت التعليمي الهادئ:</span>
+                        <span id="active-voice-badge" class="text-[11px] font-extrabold bg-teal-50 text-teal-800 px-2.5 py-0.5 rounded-full border border-teal-200 en-font">Detecting natural voice...</span>
+                    </div>
+                    <p class="text-[11px] font-bold text-slate-500">تم ضبط النبرة والوقفات لتكون هادئة، واضحة المخارج، ومريحة لاستيعاب الطلاب</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Calm Preset Profiles -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-extrabold">
+                    <button onclick="setCalmVoiceProfile('calm_female')" id="vp-calm_female" class="px-3 py-1.5 rounded-lg bg-teal-600 text-white shadow-sm transition flex items-center gap-1">
+                        <span>🌸 معلمة هادئة</span>
+                    </button>
+                    <button onclick="setCalmVoiceProfile('calm_male')" id="vp-calm_male" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1">
+                        <span>👨‍🏫 معلم هادئ</span>
+                    </button>
+                    <button onclick="setCalmVoiceProfile('extra_calm')" id="vp-extra_calm" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1">
+                        <span>🌿 تأسيسي متأنٍ جداً</span>
+                    </button>
+                </div>
+
+                <!-- Specific Device Voice Selector -->
+                <select id="voice-select-dropdown" onchange="onManualVoiceSelect(this.value)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-teal-500 en-font max-w-[210px]" dir="ltr" title="اختر الصوت المفضل من الأصوات المتوفرة في متصفحك">
+                    <option value="auto">✨ Auto Best Calm Voice</option>
+                </select>
+
+                <!-- Test Calm Voice Button -->
+                <button onclick="testCalmVoice()" class="px-3 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 text-xs font-extrabold transition flex items-center gap-1" title="استمع لتجربة الصوت الهادئ">
+                    <i class="fa-solid fa-ear-listen"></i>
+                    <span>تجربة الصوت</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Live Speaking Status Banner -->
+        <div id="live-reader-bar" class="no-print mb-5 bg-slate-900 text-white rounded-3xl p-4 shadow-lg border-2 border-indigo-400/40 flex flex-wrap items-center justify-between gap-4 transition-all">
+            <div class="flex items-center gap-3.5">
+                <div id="speaker-avatar" class="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-2xl shrink-0 shadow-inner">
+                    🎙️
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider bg-indigo-500/30 text-indigo-200 px-2.5 py-0.5 rounded-full border border-indigo-400/30">شريط القارئ الناطق الذكي</span>
+                        <div id="sound-wave-indicator" class="sound-wave hidden items-center gap-0.5 text-amber-400 h-5 px-1">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div id="live-speech-text" class="text-sm sm:text-lg font-bold text-amber-300 mt-1 en-font" dir="ltr">
+                        Click any card, word, or English meaning below to listen! 🔊
+                    </div>
+                    <div id="live-speech-ar" class="text-xs font-bold text-slate-300 mt-0.5">
+                        اضغط على أي بطاقة أو على نص المعنى الإنجليزي للاستماع للنطق الصحيح مع التظليل التفاعلي
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mode Switcher Tabs -->
+            <div class="flex flex-wrap items-center gap-1.5 bg-slate-800 p-1.5 rounded-2xl border border-slate-700">
+                <button onclick="switchView('poster')" id="tab-poster" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-400 text-slate-950 shadow transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>لوحة المفردات الناطقة (الورقة المصورة)</span>
+                </button>
+                <button onclick="switchView('spotlight')" id="tab-spotlight" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>بطاقات الشرح والسبورة</span>
+                </button>
+                <button onclick="switchView('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>تحدي المعاني بالإنجليزية</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ======================================================================= -->
+        <!-- VIEW 1: INTERACTIVE POSTER VIEW (REPLICA OF THE WORKSHEET IMAGE)        -->
+        <!-- ======================================================================= -->
+        <section id="view-poster" class="block">
+            <div class="bg-white rounded-[2.5rem] shadow-2xl border-4 border-amber-200/80 p-4 sm:p-8 md:p-10 relative overflow-hidden">
+                
+                <!-- Decorative Corner Zigzags & Stars (Matching Worksheet Aesthetic) -->
+                <div class="pointer-events-none select-none absolute top-4 right-6 text-amber-300 text-2xl opacity-75">★</div>
+                <div class="pointer-events-none select-none absolute top-12 left-8 text-rose-300 text-xl opacity-75">✦</div>
+
+                <!-- Worksheet Top Header (Matching VOCABULARY / المفردات + LANGUA LEARN Logo) -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 mb-6 border-b-2 border-dashed border-slate-200">
+                    <!-- Right Decorative Zigzags -->
+                    <div class="hidden md:flex flex-col gap-1.5 text-teal-400/70">
+                        <svg width="90" height="36" viewBox="0 0 90 36" fill="none">
+                            <path d="M2 14 L16 4 L30 14 L44 4 L58 14 L72 4" stroke="#f4a261" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 30 L24 20 L38 30 L52 20 L66 30 L80 20" stroke="#8ecae6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <!-- Center Colorful Title: VOCABULARY المفردات -->
+                    <div class="text-center">
+                        <div class="en-font text-3xl sm:text-5xl font-black tracking-wider flex items-center justify-center gap-1 select-none" dir="ltr" style="text-shadow: 2px 2px 0px #1e293b;">
+                            <span class="text-sky-500">V</span>
+                            <span class="text-teal-400">O</span>
+                            <span class="text-amber-400">C</span>
+                            <span class="text-rose-400">A</span>
+                            <span class="text-orange-400">B</span>
+                            <span class="text-amber-500">U</span>
+                            <span class="text-emerald-400">L</span>
+                            <span class="text-rose-400">A</span>
+                            <span class="text-orange-500">R</span>
+                            <span class="text-pink-400">Y</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-black text-rose-500 mt-1" style="text-shadow: 1px 1px 0px #1e293b;">
+                            المفردات
+                        </h2>
+                        <p class="no-print text-xs sm:text-sm font-bold text-slate-500 mt-2 bg-slate-100 inline-block px-4 py-1 rounded-full border border-slate-200">
+                            💡 اضغط على <strong>الكلمة</strong> أو <strong>المعنى الإنجليزي</strong> أو <strong>الأزرار الصوتية</strong> للاستماع الفوري
+                        </p>
+                    </div>
+
+                    <!-- Left Langua Learn Badge -->
+                    <div class="flex items-center gap-3 bg-gradient-to-br from-purple-50 to-orange-50 px-4 py-2.5 rounded-2xl border-2 border-purple-200 shadow-sm" dir="ltr">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-b from-purple-700 to-orange-500 text-white flex flex-col items-center justify-center shadow">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                            <i class="fa-solid fa-book-open text-xs -mt-1"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="en-font font-black text-lg leading-none text-orange-500 tracking-wide">LANGUA</div>
+                            <div class="en-font font-black text-lg leading-none text-purple-900 tracking-wide">LEARN</div>
+                            <div class="en-font text-[10px] font-bold text-slate-500 mt-0.5">Learn, Grow, Succeed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14 Vocabulary Cards Grid (2 Columns on Desktop matching exact poster left/right layout) -->
+                <div id="poster-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5" dir="ltr">
+                    <!-- Populated dynamically by JS to match the 7 rows x 2 columns in the image -->
+                </div>
+
+                <!-- Worksheet Footer Credit -->
+                <div class="mt-8 pt-4 border-t-2 border-slate-100 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-2 text-slate-800 font-black text-base sm:text-lg">
+                        <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                        <span>المعلم ماجد السويهري</span>
+                    </div>
+                    <div class="no-print flex flex-wrap items-center gap-2">
+                        <button onclick="playOnlyAllMeanings()" class="px-4 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-800 font-extrabold text-xs sm:text-sm border border-indigo-200 transition flex items-center gap-2">
+                            <i class="fa-solid fa-ear-listen"></i>
+                            <span>قراءة جميع المعاني بالإنجليزية متتالية</span>
+                        </button>
+                        <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-print"></i>
+                            <span>طباعة الورقة</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================= -->
+        <!-- VIEW 2: SMARTBOARD SPOTLIGHT & PRONUNCIATION STUDIO                     -->
+        <!-- ======================================================================= -->
+        <section id="view-spotlight" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Giant Active Card (8 cols) -->
+                <div class="lg:col-span-8">
+                    <div id="spotlight-card-container" class="rounded-[2.5rem] p-6 sm:p-10 text-white shadow-2xl border-4 border-white transition-all relative overflow-hidden">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Navigation & Pronunciation Recorder Bar -->
+                    <div class="bg-white rounded-3xl p-4 sm:p-5 mt-4 shadow-md border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                        <button onclick="prevSpotlight()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>المفردة السابقة</span>
+                        </button>
+
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="startPronunciationCheck('word')" id="btn-mic-word" class="px-4 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border-2 border-rose-200 font-extrabold text-xs sm:text-sm transition flex items-center gap-2">
+                                <i class="fa-solid fa-microphone"></i>
+                                <span>اختبر نطقك للكلمة</span>
+                            </button>
+                            <button onclick="startPronunciationCheck('meaning')" id="btn-mic-meaning" class="px-4 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border-2 border-indigo-200 font-extrabold text-xs sm:text-sm transition flex items-center gap-2">
+                                <i class="fa-solid fa-microphone-lines"></i>
+                                <span>اقرأ المعنى بالإنجليزية</span>
+                            </button>
+                        </div>
+
+                        <button onclick="nextSpotlight()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow transition flex items-center gap-2">
+                            <span>المفردة التالية</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Pronunciation Feedback Box -->
+                    <div id="mic-feedback-box" class="hidden mt-4 p-4 rounded-2xl border-2 font-bold text-sm"></div>
+                </div>
+
+                <!-- Quick Word List Sidebar (4 cols) -->
+                <aside class="lg:col-span-4 bg-white rounded-3xl p-4 sm:p-5 shadow-lg border-2 border-indigo-50">
+                    <h3 class="font-black text-base text-slate-800 mb-3 pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <span><i class="fa-solid fa-list-ol text-indigo-600 ml-1.5"></i>قائمة المفردات (14)</span>
+                        <span id="spotlight-counter" class="text-xs bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-extrabold">1 / 14</span>
+                    </h3>
+                    <div id="spotlight-sidebar-list" class="space-y-2 max-h-[520px] overflow-y-auto pr-1"></div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ======================================================================= -->
+        <!-- VIEW 3: INTERACTIVE MEANING QUIZ (تحدي الكلمة ومعناها بالإنجليزية)       -->
+        <!-- ======================================================================= -->
+        <section id="view-quiz" class="hidden">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-indigo-100 max-w-4xl mx-auto">
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-6 border-b border-slate-200">
+                    <div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-3 py-1 rounded-full">تدريب ناطق على معاني المفردات بالإنجليزية</span>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">استمع إلى المعنى باللغة الإنجليزية واختر الكلمة المناسبة! 🎯</h3>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200">
+                        <div class="text-xs font-bold text-slate-500">النتيجة:</div>
+                        <div id="quiz-score-badge" class="text-lg font-black text-emerald-600">0 / 14</div>
+                        <button onclick="resetQuiz()" class="text-xs font-bold text-indigo-600 hover:underline mr-2">إعادة التدريب</button>
+                    </div>
+                </div>
+
+                <!-- Active Quiz Question Area -->
+                <div id="quiz-question-box"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ============================================================================
+        // DATASET: ALL 14 VOCABULARY CARDS FROM TEACHER MAJED AL-SUWAIHRI'S WORKSHEET
+        // Exact order: Row 1 (Left, Right) -> Row 7 (Left, Right)
+        // ============================================================================
+        const vocabItems = [
+            {
+                id: 1,
+                word: "Frightening",
+                arWord: "مخيف",
+                enMeaning: "scary",
+                arMeaning: "مخيف / مرعب",
+                phonetic: "/ˈfraɪ.tən.ɪŋ/",
+                exampleEn: "The mummy costume looks very frightening and scary!",
+                exampleAr: "زيّ المومياء يبدو مخيفاً ومرعباً جداً!",
+                bgHex: "#5aaee2",
+                borderHex: "#3b8ec2",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Cute Mummy Illustration matching card 1 -->
+                    <circle cx="55" cy="34" r="22" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+                    <rect x="37" y="26" width="36" height="14" rx="6" fill="#1e293b"/>
+                    <circle cx="47" cy="33" r="4.5" fill="#fff"/>
+                    <circle cx="63" cy="33" r="4.5" fill="#fff"/>
+                    <circle cx="47" cy="33" r="2" fill="#0f172a"/>
+                    <circle cx="63" cy="33" r="2" fill="#0f172a"/>
+                    <path d="M34 22 L76 28 M35 42 L75 38 M38 16 L72 22" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <!-- Body & Raised Arms -->
+                    <rect x="38" y="54" width="34" height="36" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M38 62 L18 46 M72 62 L92 46" stroke="#e2e8f0" stroke-width="11" stroke-linecap="round"/>
+                    <path d="M38 62 L18 46 M72 62 L92 46" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,5" stroke-linecap="round"/>
+                    <path d="M38 65 L72 60 M38 76 L72 72 M38 84 L72 80" stroke="#94a3b8" stroke-width="3"/>
+                    <!-- Legs -->
+                    <path d="M46 90 L44 104 M64 90 L66 104" stroke="#cbd5e1" stroke-width="10" stroke-linecap="round"/>
+                    <!-- Loose bandage strip -->
+                    <path d="M18 46 Q 10 58 16 68" stroke="#e2e8f0" stroke-width="5" fill="none" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 2,
+                word: "Noisy",
+                arWord: "صاخب",
+                enMeaning: "makes a lot of noise",
+                arMeaning: "يصدر الكثير من الضوضاء",
+                phonetic: "/ˈnɔɪ.zi/",
+                exampleEn: "This loudspeaker is very noisy; it makes a lot of noise.",
+                exampleAr: "مكبر الصوت هذا صاخب جداً؛ إنه يصدر الكثير من الضوضاء.",
+                bgHex: "#64b5cd",
+                borderHex: "#4294ad",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Megaphone & Noisy Face matching card 2 -->
+                    <path d="M12 58 L26 58 L42 72 L42 40 L26 50 L12 50 Z" fill="#dc2626"/>
+                    <path d="M46 46 Q 53 56 46 66 M52 40 Q 62 56 52 72" stroke="#dc2626" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <!-- Jagged burst -->
+                    <path d="M58 26 L65 16 L73 25 L84 14 L87 26 L98 22 L94 34" stroke="#dc2626" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Angry/Noisy Red Face -->
+                    <circle cx="78" cy="58" r="21" fill="#dc2626"/>
+                    <path d="M68 51 L74 55 L68 59 M88 51 L82 55 L88 59" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M71 70 Q 78 63 85 70" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 3,
+                word: "lucky",
+                arWord: "محظوظ",
+                enMeaning: "to have a good luck",
+                arMeaning: "أن يكون لديك حظ جيد",
+                phonetic: "/ˈlʌk.i/",
+                exampleEn: "He is so lucky to have a good luck and find a diamond!",
+                exampleAr: "إنه محظوظ جداً لأن لديه حظاً جيداً ووجد ألماسة!",
+                bgHex: "#f3924b",
+                borderHex: "#d97328",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Lucky person finding diamonds matching card 3 -->
+                    <ellipse cx="58" cy="96" rx="34" ry="8" fill="#854d0e"/>
+                    <!-- Sparkling Diamonds -->
+                    <polygon points="24,42 32,34 40,42 32,54" fill="#38bdf8" stroke="#e0f2fe" stroke-width="1.5"/>
+                    <polygon points="48,92 55,84 62,92 55,100" fill="#7dd3fc"/>
+                    <!-- Person -->
+                    <circle cx="56" cy="28" r="9" fill="#fca5a5"/>
+                    <path d="M44 40 L68 40 L64 68 L48 68 Z" fill="#b45309"/>
+                    <path d="M32 45 L46 42 M68 42 L78 55" stroke="#fca5a5" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M50 68 L40 90 M62 68 L72 88" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/>
+                    <!-- Sparkles -->
+                    <path d="M20 26 L24 26 M22 24 L22 28 M38 24 L42 24 M40 22 L40 26" stroke="#fef08a" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 4,
+                word: "Popular",
+                arWord: "ذو شعبية",
+                enMeaning: "someone who a lot of people like",
+                arMeaning: "شخص يحبه الكثير من الناس",
+                phonetic: "/ˈpɒp.jə.lər/",
+                exampleEn: "A popular person is someone who a lot of people like.",
+                exampleAr: "الشخص ذو الشعبية هو شخص يحبه الكثير من الناس.",
+                bgHex: "#f5ad42",
+                borderHex: "#d98e20",
+                textDark: true,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Popular person & cheering crowd matching card 4 -->
+                    <circle cx="55" cy="24" r="9" fill="#0f172a"/>
+                    <path d="M41 36 L69 36 L65 66 L45 66 Z" fill="#0f172a"/>
+                    <path d="M55 36 L53 52 L55 56 L57 52 Z" fill="#ffffff"/>
+                    <!-- Crowd silhouettes below -->
+                    <circle cx="28" cy="84" r="8" fill="#0f172a"/>
+                    <circle cx="55" cy="88" r="8" fill="#0f172a"/>
+                    <circle cx="82" cy="84" r="8" fill="#0f172a"/>
+                    <path d="M18 98 Q 28 88 38 98 M44 102 Q 55 92 66 102 M72 98 Q 82 88 92 98" fill="#0f172a"/>
+                    <path d="M20 82 L15 66 M36 82 L41 68 M74 82 L69 68 M90 82 L95 66" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+                    <!-- Sparkle stars -->
+                    <path d="M76 14 L78 20 L84 22 L78 24 L76 30 L74 24 L68 22 L74 20 Z" fill="#0f172a"/>
+                </svg>`
+            },
+            {
+                id: 5,
+                word: "Interesting",
+                arWord: "مثير للاهتمام",
+                enMeaning: "makes you think",
+                arMeaning: "شيء يجعلك تفكر",
+                phonetic: "/ˈɪn.trə.stɪŋ/",
+                exampleEn: "Science is very interesting because it makes you think.",
+                exampleAr: "العلوم مثيرة للاهتمام جداً لأنها تجعلك تفكر.",
+                bgHex: "#62b59e",
+                borderHex: "#42967f",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Two young scientists with test tubes matching card 5 -->
+                    <!-- Left Scientist -->
+                    <circle cx="36" cy="32" r="10" fill="#d97706"/>
+                    <rect x="24" y="44" width="24" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <path d="M30 80 L30 98 M42 80 L42 98" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+                    <!-- Right Scientist -->
+                    <circle cx="74" cy="32" r="10" fill="#fcd34d"/>
+                    <circle cx="84" cy="28" r="6" fill="#1e293b"/>
+                    <rect x="62" y="44" width="24" height="36" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <path d="M68 80 L68 98 M80 80 L80 98" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+                    <!-- Test tube & bubbles in middle -->
+                    <rect x="51" y="45" width="8" height="22" rx="4" fill="#38bdf8" stroke="#fff" stroke-width="1.5"/>
+                    <circle cx="55" cy="36" r="3" fill="#fef08a"/>
+                    <circle cx="52" cy="28" r="2" fill="#fef08a"/>
+                </svg>`
+            },
+            {
+                id: 6,
+                word: "Wonderful",
+                arWord: "رائع",
+                enMeaning: "brilliant and pleasing",
+                arMeaning: "باهر ومبهج للنفس",
+                phonetic: "/ˈwʌn.də.fəl/",
+                exampleEn: "The waterfall view is wonderful, brilliant and pleasing!",
+                exampleAr: "منظر الشلال رائع وباهر ومبهج للنفس!",
+                bgHex: "#82c878",
+                borderHex: "#5ea854",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Waterfall & Nature scene matching card 6 -->
+                    <circle cx="55" cy="56" r="44" fill="#bbf7d0"/>
+                    <!-- Mountains -->
+                    <polygon points="18,65 42,32 64,65" fill="#64748b"/>
+                    <polygon points="48,65 74,28 96,65" fill="#475569"/>
+                    <!-- Waterfall stream -->
+                    <path d="M48 45 L62 45 L68 88 L42 88 Z" fill="#38bdf8"/>
+                    <path d="M52 48 L50 84 M58 50 L60 84" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Green Trees -->
+                    <polygon points="26,65 16,65 21,46" fill="#15803d"/>
+                    <polygon points="88,65 78,65 83,44" fill="#15803d"/>
+                    <!-- River pool -->
+                    <ellipse cx="55" cy="88" rx="34" ry="10" fill="#0284c7"/>
+                    <path d="M40 88 Q 55 92 70 88" stroke="#bae6fd" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 7,
+                word: "lovely",
+                arWord: "جميل",
+                enMeaning: "pretty or beautiful",
+                arMeaning: "جميل أو لطيف المنظر",
+                phonetic: "/ˈlʌv.li/",
+                exampleEn: "What a lovely butterfly! It is so pretty or beautiful.",
+                exampleAr: "يا لها من فراشة جميلة! إنها لطيفة وجميلة جداً.",
+                bgHex: "#92ce68",
+                borderHex: "#71ad47",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Blue Butterfly matching card 7 -->
+                    <!-- Upper Wings -->
+                    <path d="M55 52 C 25 14, 6 36, 22 60 C 32 70, 48 62, 55 56 Z" fill="#2563eb" stroke="#1e3a8a" stroke-width="3"/>
+                    <path d="M55 52 C 85 14, 104 36, 88 60 C 78 70, 62 62, 55 56 Z" fill="#2563eb" stroke="#1e3a8a" stroke-width="3"/>
+                    <!-- Lower Wings -->
+                    <path d="M55 58 C 32 64, 20 88, 38 94 C 50 96, 54 78, 55 64 Z" fill="#3b82f6" stroke="#1e3a8a" stroke-width="3"/>
+                    <path d="M55 58 C 78 64, 90 88, 72 94 C 60 96, 56 78, 55 64 Z" fill="#3b82f6" stroke="#1e3a8a" stroke-width="3"/>
+                    <!-- Wing Dots -->
+                    <circle cx="30" cy="44" r="5" fill="#93c5fd"/>
+                    <circle cx="80" cy="44" r="5" fill="#93c5fd"/>
+                    <circle cx="38" cy="80" r="4" fill="#bfdbfe"/>
+                    <circle cx="72" cy="80" r="4" fill="#bfdbfe"/>
+                    <!-- Body & Antennae -->
+                    <rect x="52" y="36" width="6" height="42" rx="3" fill="#1e293b"/>
+                    <path d="M53 36 Q 44 22 38 24 M57 36 Q 66 22 72 24" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 8,
+                word: "amazing",
+                arWord: "مذهل",
+                enMeaning: "very good",
+                arMeaning: "جيد جداً / مدهش",
+                phonetic: "/əˈmeɪ.zɪŋ/",
+                exampleEn: "Your test result is amazing! You did a very good job.",
+                exampleAr: "نتيجة اختبارك مذهلة! لقد قمت بعمل جيد جداً.",
+                bgHex: "#f4973c",
+                borderHex: "#d6771b",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Star-Struck Emoji matching card 8 -->
+                    <circle cx="55" cy="56" r="40" fill="#facc15" stroke="#eab308" stroke-width="3"/>
+                    <!-- Big Smile -->
+                    <path d="M32 62 Q 55 88 78 62 Z" fill="#713f12"/>
+                    <path d="M35 63 L75 63 L72 70 L38 70 Z" fill="#ffffff"/>
+                    <!-- Left Star Eye -->
+                    <polygon points="36,24 40,34 51,35 43,42 45,53 36,47 27,53 29,42 21,35 32,34" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+                    <!-- Right Star Eye -->
+                    <polygon points="74,24 78,34 89,35 81,42 83,53 74,47 65,53 67,42 59,35 70,34" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+                </svg>`
+            },
+            {
+                id: 9,
+                word: "friendly",
+                arWord: "ودود",
+                enMeaning: "nice and kind",
+                arMeaning: "لطيف وعطوف",
+                phonetic: "/ˈfrend.li/",
+                exampleEn: "Our classmates are friendly; they are always nice and kind.",
+                exampleAr: "زملاؤنا في الفصل ودودون؛ فهم دائماً لطيفون وعطوفون.",
+                bgHex: "#f9d448",
+                borderHex: "#dfb522",
+                textDark: true,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Two kids playing together with blocks matching card 9 -->
+                    <!-- Left Kid -->
+                    <circle cx="30" cy="40" r="12" fill="#fca5a5"/>
+                    <path d="M18 36 Q 30 22 42 36" fill="#ea580c"/>
+                    <rect x="20" y="52" width="20" height="26" rx="6" fill="#60a5fa"/>
+                    <!-- Right Kid -->
+                    <circle cx="80" cy="40" r="12" fill="#fcd34d"/>
+                    <path d="M68 34 Q 80 20 92 34" fill="#451a03"/>
+                    <rect x="70" y="52" width="20" height="26" rx="6" fill="#ef4444"/>
+                    <!-- Colorful Toy Blocks in Middle -->
+                    <rect x="46" y="74" width="16" height="14" rx="2" fill="#a855f7"/>
+                    <rect x="49" y="60" width="12" height="14" rx="2" fill="#22c55e"/>
+                    <rect x="34" y="80" width="12" height="10" rx="2" fill="#3b82f6"/>
+                </svg>`
+            },
+            {
+                id: 10,
+                word: "excellent",
+                arWord: "ممتاز",
+                enMeaning: "done very well",
+                arMeaning: "متقن / أُنجز بشكل رائع",
+                phonetic: "/ˈek.səl.ənt/",
+                exampleEn: "Excellent work! Your homework is done very well.",
+                exampleAr: "عمل ممتاز! واجبك متقن وأُنجز بشكل رائع.",
+                bgHex: "#69c7d2",
+                borderHex: "#45a4af",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- 100% Stamp Badge matching card 10 -->
+                    <ellipse cx="55" cy="56" rx="44" ry="34" transform="rotate(-12 55 56)" fill="none" stroke="#16a34a" stroke-width="5"/>
+                    <ellipse cx="55" cy="56" rx="39" ry="29" transform="rotate(-12 55 56)" fill="#dcfce7" opacity="0.25"/>
+                    <text x="55" y="65" text-anchor="middle" transform="rotate(-12 55 56)" fill="#15803d" font-size="28" font-weight="900" font-family="Fredoka, sans-serif">100%</text>
+                </svg>`
+            },
+            {
+                id: 11,
+                word: "special",
+                arWord: "مميز",
+                enMeaning: "something unique",
+                arMeaning: "شيء متفرد",
+                phonetic: "/ˈspeʃ.əl/",
+                exampleEn: "This gift is very special; it is something unique for you.",
+                exampleAr: "هذه الهدية مميزة جداً؛ إنها شيء متفرد من أجلك.",
+                bgHex: "#a7d769",
+                borderHex: "#82b444",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Gift Box with Bow matching card 11 -->
+                    <rect x="24" y="46" width="62" height="48" rx="6" fill="#dc2626"/>
+                    <rect x="20" y="34" width="70" height="14" rx="4" fill="#ef4444"/>
+                    <!-- Ribbon Vertical & Horizontal -->
+                    <rect x="49" y="34" width="12" height="60" fill="#fde047"/>
+                    <rect x="24" y="64" width="62" height="10" fill="#fde047"/>
+                    <!-- Top Bow -->
+                    <path d="M55 34 C 35 14, 26 30, 50 34" fill="none" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M55 34 C 75 14, 84 30, 60 34" fill="none" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 12,
+                word: "important",
+                arWord: "هام",
+                enMeaning: "Something you care about with the most",
+                arMeaning: "شيء تهتم به كثيراً وذو أولوية",
+                phonetic: "/ɪmˈpɔː.tənt/",
+                exampleEn: "Family and study are important; something you care about with the most.",
+                exampleAr: "العائلة والدراسة أمران هامان؛ شيء تهتم به كثيراً.",
+                bgHex: "#f5b042",
+                borderHex: "#d48f22",
+                textDark: true,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Important Top Secret File Folder matching card 12 -->
+                    <rect x="28" y="20" width="52" height="72" rx="4" transform="rotate(8 54 56)" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                    <rect x="24" y="22" width="54" height="72" rx="5" fill="#e6c280" stroke="#c89d54" stroke-width="2"/>
+                    <!-- Red Stamp -->
+                    <rect x="31" y="52" width="40" height="14" rx="2" transform="rotate(-18 51 59)" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+                    <text x="51" y="62" text-anchor="middle" transform="rotate(-18 51 59)" fill="#dc2626" font-size="8" font-weight="900">IMPORTANT</text>
+                </svg>`
+            },
+            {
+                id: 13,
+                word: "enormous",
+                arWord: "ضخم",
+                enMeaning: "very big",
+                arMeaning: "كبير جداً / هائل الحجم",
+                phonetic: "/ɪˈnɔː.məs/",
+                exampleEn: "Look at that enormous mushroom! It is very big.",
+                exampleAr: "انظر إلى ذلك الفطر الضخم! إنه كبير جداً.",
+                bgHex: "#f38b3c",
+                borderHex: "#d16b1d",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Enormous Giant Mushroom & Tiny Person matching card 13 -->
+                    <!-- Mushroom Stem -->
+                    <path d="M48 48 L66 48 L70 98 L44 98 Z" fill="#fef3c7"/>
+                    <!-- Giant Red Mushroom Cap -->
+                    <path d="M12 50 C 12 10, 102 10, 102 50 Z" fill="#dc2626"/>
+                    <circle cx="36" cy="34" r="7" fill="#fecaca"/>
+                    <circle cx="62" cy="24" r="9" fill="#fecaca"/>
+                    <circle cx="82" cy="38" r="6" fill="#fecaca"/>
+                    <!-- Tiny Person standing next to it for scale -->
+                    <circle cx="32" cy="74" r="4.5" fill="#fca5a5"/>
+                    <rect x="28" y="79" width="8" height="11" rx="2" fill="#fb7185"/>
+                    <path d="M30 90 L30 98 M34 90 L34 98" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 14,
+                word: "tidy",
+                arWord: "منظم ونظيف",
+                enMeaning: "clean and organized",
+                arMeaning: "نظيف ومرتب بعناية",
+                phonetic: "/ˈtaɪ.di/",
+                exampleEn: "Her room is always tidy; it is clean and organized.",
+                exampleAr: "غرفتها دائماً منظمة ونظيفة؛ إنها نظيفة ومرتبة.",
+                bgHex: "#55afd8",
+                borderHex: "#358eb7",
+                textDark: false,
+                svg: `
+                <svg viewBox="0 0 110 110" class="w-24 h-24 sm:w-28 sm:h-28 illus-float drop-shadow-md">
+                    <!-- Girl organizing tidy shelf matching card 14 -->
+                    <!-- Wooden Closet / Shelf -->
+                    <rect x="18" y="34" width="36" height="62" rx="3" fill="#78350f" stroke="#451a03" stroke-width="2"/>
+                    <line x1="18" y1="54" x2="54" y2="54" stroke="#451a03" stroke-width="3"/>
+                    <line x1="18" y1="74" x2="54" y2="74" stroke="#451a03" stroke-width="3"/>
+                    <!-- Neatly folded clothes stacks -->
+                    <rect x="24" y="44" width="24" height="8" rx="2" fill="#38bdf8"/>
+                    <rect x="24" y="64" width="24" height="8" rx="2" fill="#facc15"/>
+                    <rect x="24" y="84" width="24" height="8" rx="2" fill="#4ade80"/>
+                    <!-- Tidy Girl holding folded stack -->
+                    <circle cx="76" cy="36" r="11" fill="#fca5a5"/>
+                    <path d="M64 34 Q 76 18 88 34" fill="#7c2d12"/>
+                    <rect x="66" y="48" width="20" height="28" rx="5" fill="#93c5fd"/>
+                    <rect x="64" y="54" width="22" height="10" rx="2" fill="#f43f5e"/>
+                    <path d="M71 76 L71 96 M81 76 L81 96" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+                </svg>`
+            }
+        ];
+
+        // ============================================================================
+        // SPEECH ENGINE & INTERACTIVE READING STATE
+        // ============================================================================
+        let currentReadMode = 'both'; // 'both' (Word + EN Meaning), 'meaning' (EN Meaning only), 'word' (Word only)
+        let speechRates = [0.76, 0.64, 0.88];
+        let speechRateLabels = [
+            'السرعة: هادئة تعليمية (0.76x)',
+            'السرعة: بطيئة ومتأنية (0.64x)',
+            'السرعة: معتدلة (0.88x)'
+        ];
+        let currentRateIdx = 0;
+
+        // Calm Educational Voice Profiles
+        const calmProfiles = {
+            calm_female: {
+                label: 'معلمة هادئة',
+                preferredGender: 'female',
+                pitch: 0.94,      // Warm, soothing pitch (not shrill or high)
+                rateMultiplier: 1.0,
+                pauseBetweenMs: 550
+            },
+            calm_male: {
+                label: 'معلم هادئ',
+                preferredGender: 'male',
+                pitch: 0.88,      // Deep, calm, reassuring tone
+                rateMultiplier: 0.96,
+                pauseBetweenMs: 580
+            },
+            extra_calm: {
+                label: 'تأسيسي متأنٍ جداً',
+                preferredGender: 'female',
+                pitch: 0.92,
+                rateMultiplier: 0.86, // Extra slow and deliberate articulation
+                pauseBetweenMs: 750
+            }
+        };
+        let activeProfileKey = 'calm_female';
+        let manualSelectedVoiceURI = 'auto';
+        let rankedEnglishVoices = [];
+
+        let isAutoPlaying = false;
+        let autoPlayIndex = 0;
+        let autoPlayTimer = null;
+        let activeCardId = null;
+
+        let currentSpotlightIdx = 0;
+        let currentQuizIdx = 0;
+        let quizScore = 0;
+        let quizAnswered = {};
+
+        // Score and rank available browser voices to pick the calmest, most natural educational voice
+        function scoreVoiceForCalmEducation(v, preferredGender = 'female') {
+            if (!v || !v.lang) return -999;
+            const lang = v.lang.toLowerCase();
+            if (!lang.startsWith('en')) return -999;
+
+            const name = v.name.toLowerCase();
+            let score = 0;
+
+            // Prefer standard US, UK, or international clear English accents
+            if (lang === 'en-gb' || lang === 'en_gb') score += 32; // British English often sounds very calm and articulate in TTS
+            else if (lang === 'en-us' || lang === 'en_us') score += 30;
+            else if (lang === 'en-au' || lang === 'en-ca' || lang === 'en-ie') score += 22;
+            else score += 10;
+
+            // Boost Neural / Online / Natural / Enhanced Studio voices (Edge, Chrome, macOS/iOS)
+            if (name.includes('natural') || name.includes('online')) score += 110;
+            if (name.includes('neural') || name.includes('wavenet') || name.includes('studio')) score += 95;
+            if (name.includes('enhanced') || name.includes('premium') || name.includes('siri')) score += 80;
+            if (name.includes('google uk english') || name.includes('google us english')) score += 70;
+
+            // Known warm, calm female educational voices across Windows, Mac, iOS, Android, Chrome, Edge
+            const calmFemaleNames = [
+                'sonia', 'libby', 'jenny', 'aria', 'emma', 'ava', 'michelle', 'ana',
+                'clara', 'molly', 'samantha', 'allison', 'serena', 'karen', 'moira',
+                'tessa', 'victoria', 'fiona', 'google uk english female', 'zira'
+            ];
+            // Known warm, calm male educational voices
+            const calmMaleNames = [
+                'ryan', 'andrew', 'brian', 'guy', 'christopher', 'ERIC', 'steffan',
+                'thomas', 'daniel', 'oliver', 'arthur', 'rishi', 'aaron',
+                'google uk english male', 'alex', 'david'
+            ];
+
+            const isFemaleMatch = calmFemaleNames.some(fn => name.includes(fn)) || name.includes('female');
+            const isMaleMatch = calmMaleNames.some(mn => name.includes(mn)) || (name.includes('male') && !name.includes('female'));
+
+            if (preferredGender === 'female') {
+                if (isFemaleMatch) score += 45;
+                if (isMaleMatch) score -= 15;
+            } else if (preferredGender === 'male') {
+                if (isMaleMatch) score += 45;
+                if (isFemaleMatch) score -= 15;
+            }
+
+            // Extra bonus for top-tier calm voices
+            if (name.includes('sonia') || name.includes('jenny') || name.includes('emma') || name.includes('ava') || name.includes('ryan') || name.includes('daniel') || name.includes('samantha') || name.includes('google uk english')) {
+                score += 25;
+            }
+
+            // Penalize robotic or novelty voices
+            if (name.includes('whisper') || name.includes('zarvox') || name.includes('bells') || name.includes('trinoids') || name.includes('boing') || name.includes('albert') || name.includes('fred') || name.includes('espeak')) {
+                score -= 200;
+            }
+
+            return score;
+        }
+
+        function refreshVoiceList() {
+            if (!('speechSynthesis' in window)) return;
+            const allVoices = window.speechSynthesis.getVoices() || [];
+            const profile = calmProfiles[activeProfileKey] || calmProfiles.calm_female;
+
+            rankedEnglishVoices = allVoices
+                .filter(v => v.lang && v.lang.toLowerCase().startsWith('en'))
+                .map(v => ({
+                    voice: v,
+                    score: scoreVoiceForCalmEducation(v, profile.preferredGender)
+                }))
+                .sort((a, b) => b.score - a.score);
+
+            // Populate dropdown
+            const dropdown = document.getElementById('voice-select-dropdown');
+            if (dropdown && rankedEnglishVoices.length > 0) {
+                const prevVal = manualSelectedVoiceURI;
+                let optionsHtml = `<option value="auto">✨ اختيار تلقائي (أفضل صوت هادئ)</option>`;
+                rankedEnglishVoices.forEach(({ voice, score }) => {
+                    const qualityStar = score >= 120 ? '⭐ HD ' : (score >= 75 ? '✦ ' : '');
+                    const cleanName = voice.name.replace(/Microsoft |Online \(Natural\) - /g, '');
+                    optionsHtml += `<option value="${voice.voiceURI}">${qualityStar}${cleanName} (${voice.lang})</option>`;
+                });
+                dropdown.innerHTML = optionsHtml;
+                dropdown.value = rankedEnglishVoices.some(r => r.voice.voiceURI === prevVal) ? prevVal : 'auto';
+            }
+
+            updateActiveVoiceBadge();
+        }
+
+        function getEnglishVoice() {
+            if (!('speechSynthesis' in window)) return null;
+            if (rankedEnglishVoices.length === 0) {
+                refreshVoiceList();
+            }
+            if (manualSelectedVoiceURI !== 'auto') {
+                const found = rankedEnglishVoices.find(r => r.voice.voiceURI === manualSelectedVoiceURI);
+                if (found) return found.voice;
+            }
+            return rankedEnglishVoices.length > 0 ? rankedEnglishVoices[0].voice : null;
+        }
+
+        function updateActiveVoiceBadge() {
+            const badge = document.getElementById('active-voice-badge');
+            if (!badge) return;
+            const voice = getEnglishVoice();
+            const profile = calmProfiles[activeProfileKey];
+            if (voice) {
+                const shortName = voice.name.replace(/Microsoft |Online \(Natural\) - /g, '');
+                badge.textContent = `🎙️ ${shortName} • (${profile.label})`;
+            } else {
+                badge.textContent = `🎙️ الصوت التعليمي الهادئ (${profile.label})`;
+            }
+        }
+
+        function setCalmVoiceProfile(profileKey) {
+            if (!calmProfiles[profileKey]) return;
+            activeProfileKey = profileKey;
+            manualSelectedVoiceURI = 'auto'; // Let it auto-pick the best voice for this profile
+
+            ['calm_female', 'calm_male', 'extra_calm'].forEach(k => {
+                const btn = document.getElementById('vp-' + k);
+                if (!btn) return;
+                if (k === profileKey) {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-teal-600 text-white shadow-sm transition flex items-center gap-1';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1';
+                }
+            });
+
+            refreshVoiceList();
+            testCalmVoice();
+        }
+
+        function onManualVoiceSelect(voiceURI) {
+            manualSelectedVoiceURI = voiceURI;
+            updateActiveVoiceBadge();
+            testCalmVoice();
+        }
+
+        function testCalmVoice() {
+            stopAllSpeech();
+            speakUtterance('Welcome to Langua Learn. Let us read the vocabulary words calmly and clearly.', {
+                displayBannerEn: '🎙️ Calm Educational Voice Active — Ready to read!',
+                displayBannerAr: 'تم تفعيل الصوت التعليمي الهادئ والواضح بنجاح — اضغط على أي بطاقة للاستماع'
+            });
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => refreshVoiceList();
+        }
+
+        function stopAllSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            if (autoPlayTimer) {
+                clearTimeout(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+            if (isAutoPlaying) {
+                isAutoPlaying = false;
+                updateAutoPlayButton();
+            }
+            clearAllCardHighlights();
+            document.getElementById('sound-wave-indicator').classList.add('hidden');
+            document.getElementById('sound-wave-indicator').classList.remove('flex');
+        }
+
+        function clearAllCardHighlights() {
+            activeCardId = null;
+            document.querySelectorAll('.vocab-card').forEach(el => el.classList.remove('card-speaking'));
+            document.querySelectorAll('.word-box-hl').forEach(el => el.classList.remove('speaking-highlight'));
+            document.querySelectorAll('.meaning-box-hl').forEach(el => el.classList.remove('speaking-highlight'));
+            document.querySelectorAll('.word-token').forEach(el => el.classList.remove('word-token-active'));
+        }
+
+        // Formats text slightly so the TTS engine speaks with a calm, downward educational cadence
+        function formatTextForCalmSpeech(rawText) {
+            const trimmed = (rawText || '').trim();
+            if (!trimmed) return '';
+            // Ensure a trailing period so the voice ends with a calm, reassuring downward inflection
+            if (!/[.!?]$/.test(trimmed)) {
+                return trimmed + '.';
+            }
+            return trimmed;
+        }
+
+        function speakUtterance(text, options = {}) {
+            return new Promise((resolve) => {
+                if (!('speechSynthesis' in window)) {
+                    resolve();
+                    return;
+                }
+                window.speechSynthesis.cancel();
+
+                const profile = calmProfiles[activeProfileKey] || calmProfiles.calm_female;
+                const spokenText = formatTextForCalmSpeech(text);
+
+                const utter = new SpeechSynthesisUtterance(spokenText);
+                const voice = getEnglishVoice();
+                if (voice) {
+                    utter.voice = voice;
+                    utter.lang = voice.lang || 'en-US';
+                } else {
+                    utter.lang = 'en-GB';
+                }
+
+                // Calm, deliberate educational rate and warm, non-strident pitch
+                const baseRate = options.rate || speechRates[currentRateIdx];
+                utter.rate = Math.max(0.55, Math.min(1.0, +(baseRate * profile.rateMultiplier).toFixed(2)));
+                utter.pitch = options.pitch || profile.pitch;
+                utter.volume = 0.94; // Slightly softened volume to avoid harsh peak clipping
+
+                // Show wave indicator
+                const wave = document.getElementById('sound-wave-indicator');
+                wave.classList.remove('hidden');
+                wave.classList.add('flex');
+
+                // Live reader banner update
+                if (options.displayBannerEn) {
+                    document.getElementById('live-speech-text').textContent = options.displayBannerEn;
+                } else {
+                    document.getElementById('live-speech-text').textContent = text;
+                }
+                if (options.displayBannerAr) {
+                    document.getElementById('live-speech-ar').textContent = options.displayBannerAr;
+                }
+
+                // Word boundary highlighting for English meaning tokens if containerId is passed
+                if (options.tokenContainerId) {
+                    const container = document.getElementById(options.tokenContainerId);
+                    if (container) {
+                        const tokens = Array.from(container.querySelectorAll('.word-token'));
+                        utter.onboundary = (event) => {
+                            if (event.name === 'word') {
+                                const upto = text.slice(0, event.charIndex);
+                                const wordIndex = upto.trim() === '' ? 0 : upto.trim().split(/\s+/).length;
+                                tokens.forEach((t, idx) => {
+                                    if (idx === wordIndex) t.classList.add('word-token-active');
+                                    else t.classList.remove('word-token-active');
+                                });
+                            }
+                        };
+                    }
+                }
+
+                utter.onend = () => {
+                    if (options.tokenContainerId) {
+                        const container = document.getElementById(options.tokenContainerId);
+                        if (container) {
+                            container.querySelectorAll('.word-token').forEach(t => t.classList.remove('word-token-active'));
+                        }
+                    }
+                    wave.classList.add('hidden');
+                    wave.classList.remove('flex');
+                    resolve();
+                };
+
+                utter.onerror = () => {
+                    wave.classList.add('hidden');
+                    wave.classList.remove('flex');
+                    resolve();
+                };
+
+                window.speechSynthesis.speak(utter);
+            });
+        }
+
+        // ============================================================================
+        // CARD READING ACTIONS (WORD, ENGLISH MEANING, FULL LESSON, SPELLING)
+        // ============================================================================
+        async function playCardByMode(id, forcedMode = null) {
+            stopAllSpeech();
+            const item = vocabItems.find(v => v.id === id);
+            if (!item) return;
+
+            const mode = forcedMode || currentReadMode;
+            const profile = calmProfiles[activeProfileKey] || calmProfiles.calm_female;
+            highlightActiveCard(item.id);
+
+            const wordEl = document.getElementById(`card-word-${item.id}`);
+            const meaningEl = document.getElementById(`card-meaning-${item.id}`);
+
+            if (mode === 'word') {
+                if (wordEl) wordEl.classList.add('speaking-highlight');
+                await speakUtterance(item.word, {
+                    displayBannerEn: `🔊 Word: "${item.word}" ${item.phonetic}`,
+                    displayBannerAr: `الكلمة: ${item.arWord} (${item.arMeaning})`
+                });
+                if (wordEl) wordEl.classList.remove('speaking-highlight');
+            } else if (mode === 'meaning') {
+                if (meaningEl) meaningEl.classList.add('speaking-highlight');
+                await speakUtterance(item.enMeaning, {
+                    tokenContainerId: `card-meaning-tokens-${item.id}`,
+                    displayBannerEn: `📖 Meaning of ${item.word}: "${item.enMeaning}"`,
+                    displayBannerAr: `قراءة المعنى بالإنجليزية: "${item.enMeaning}" — (${item.arMeaning})`
+                });
+                if (meaningEl) meaningEl.classList.remove('speaking-highlight');
+            } else if (mode === 'both') {
+                // Step 1: Read the English Word calmly
+                if (wordEl) wordEl.classList.add('speaking-highlight');
+                await speakUtterance(item.word, {
+                    displayBannerEn: `🔊 ${item.word} ➔ ${item.enMeaning}`,
+                    displayBannerAr: `${item.word} (${item.arWord}) — المعنى: ${item.arMeaning}`
+                });
+                if (wordEl) wordEl.classList.remove('speaking-highlight');
+
+                // Calm educational breathing pause before reading the English meaning
+                await new Promise(r => setTimeout(r, profile.pauseBetweenMs));
+                if (activeCardId !== item.id) return;
+
+                // Step 2: Read the English Meaning with word-by-word highlighting
+                if (meaningEl) meaningEl.classList.add('speaking-highlight');
+                await speakUtterance(item.enMeaning, {
+                    tokenContainerId: `card-meaning-tokens-${item.id}`,
+                    displayBannerEn: `📖 "${item.word}" means: "${item.enMeaning}"`,
+                    displayBannerAr: `المعنى باللغة الإنجليزية: ${item.enMeaning} (${item.arMeaning})`
+                });
+                if (meaningEl) meaningEl.classList.remove('speaking-highlight');
+            } else if (mode === 'example') {
+                await speakUtterance(`${item.word}. Meaning: ${item.enMeaning}. For example: ${item.exampleEn}`, {
+                    displayBannerEn: `🌟 ${item.exampleEn}`,
+                    displayBannerAr: item.exampleAr
+                });
+            }
+
+            if (!isAutoPlaying) {
+                const cardDom = document.getElementById(`vocab-card-${item.id}`);
+                if (cardDom) cardDom.classList.remove('card-speaking');
+            }
+        }
+
+        async function spellAndReadCard(id, event) {
+            if (event) event.stopPropagation();
+            stopAllSpeech();
+            const item = vocabItems.find(v => v.id === id);
+            if (!item) return;
+
+            highlightActiveCard(item.id);
+            const spelled = item.word.toLowerCase().split('').join('. ');
+            await speakUtterance(`${item.word}. ${spelled}. ${item.word}. Meaning: ${item.enMeaning}.`, {
+                rate: 0.66,
+                displayBannerEn: `🔤 Spelling: ${item.word.toUpperCase().split('').join(' - ')} ➔ ${item.enMeaning}`,
+                displayBannerAr: `تهجئة هادئة لحروف كلمة (${item.word} - ${item.arWord}) ثم قراءة المعنى بالإنجليزية`
+            });
+            clearAllCardHighlights();
+        }
+
+        function highlightActiveCard(id) {
+            clearAllCardHighlights();
+            activeCardId = id;
+            const cardDom = document.getElementById(`vocab-card-${id}`);
+            if (cardDom) {
+                cardDom.classList.add('card-speaking');
+            }
+        }
+
+        // ============================================================================
+        // AUTO-PLAY FULL LESSON (وضع المعلم الناطق الآلي لجميع الـ 14 مفردة)
+        // ============================================================================
+        function updateAutoPlayButton() {
+            const btn = document.getElementById('btn-autoplay');
+            if (isAutoPlaying) {
+                btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-rose-600 hover:bg-rose-700 text-white shadow-md transition flex items-center gap-2 animate-pulse';
+                btn.innerHTML = `<i class="fa-solid fa-circle-pause text-base"></i><span>إيقاف الدرس التلقائي (${autoPlayIndex + 1}/14)</span>`;
+            } else {
+                btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-md transition flex items-center gap-2';
+                btn.innerHTML = `<i class="fa-solid fa-circle-play text-base"></i><span>تشغيل الدرس الناطق كاملاً</span>`;
+            }
+        }
+
+        async function toggleAutoPlayLesson() {
+            if (isAutoPlaying) {
+                stopAllSpeech();
+                return;
+            }
+            switchView('poster');
+            isAutoPlaying = true;
+            autoPlayIndex = 0;
+            updateAutoPlayButton();
+            runAutoPlayStep();
+        }
+
+        async function runAutoPlayStep() {
+            if (!isAutoPlaying || autoPlayIndex >= vocabItems.length) {
+                isAutoPlaying = false;
+                updateAutoPlayButton();
+                clearAllCardHighlights();
+                return;
+            }
+
+            updateAutoPlayButton();
+            const item = vocabItems[autoPlayIndex];
+            const profile = calmProfiles[activeProfileKey] || calmProfiles.calm_female;
+            const cardEl = document.getElementById(`vocab-card-${item.id}`);
+            if (cardEl) {
+                cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            highlightActiveCard(item.id);
+            const wordEl = document.getElementById(`card-word-${item.id}`);
+            const meaningEl = document.getElementById(`card-meaning-${item.id}`);
+
+            // 1. Speak Word calmly
+            if (wordEl) wordEl.classList.add('speaking-highlight');
+            await speakUtterance(item.word, {
+                displayBannerEn: `[${autoPlayIndex + 1}/14] 🔊 ${item.word}`,
+                displayBannerAr: `المفردة (${autoPlayIndex + 1}): ${item.arWord}`
+            });
+            if (wordEl) wordEl.classList.remove('speaking-highlight');
+
+            if (!isAutoPlaying) return;
+            await new Promise(r => setTimeout(r, profile.pauseBetweenMs));
+            if (!isAutoPlaying) return;
+
+            // 2. Speak English Meaning calmly
+            if (meaningEl) meaningEl.classList.add('speaking-highlight');
+            await speakUtterance(item.enMeaning, {
+                tokenContainerId: `card-meaning-tokens-${item.id}`,
+                displayBannerEn: `[${autoPlayIndex + 1}/14] 📖 ${item.word} = "${item.enMeaning}"`,
+                displayBannerAr: `المعنى بالإنجليزية: ${item.enMeaning} (${item.arMeaning})`
+            });
+            if (meaningEl) meaningEl.classList.remove('speaking-highlight');
+
+            if (!isAutoPlaying) return;
+
+            autoPlayTimer = setTimeout(() => {
+                autoPlayIndex++;
+                runAutoPlayStep();
+            }, 950);
+        }
+
+        async function playOnlyAllMeanings() {
+            stopAllSpeech();
+            switchView('poster');
+            isAutoPlaying = true;
+            autoPlayIndex = 0;
+            updateAutoPlayButton();
+
+            for (let i = 0; i < vocabItems.length; i++) {
+                if (!isAutoPlaying) break;
+                autoPlayIndex = i;
+                updateAutoPlayButton();
+                const item = vocabItems[i];
+                const cardEl = document.getElementById(`vocab-card-${item.id}`);
+                if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                highlightActiveCard(item.id);
+
+                const meaningEl = document.getElementById(`card-meaning-${item.id}`);
+                if (meaningEl) meaningEl.classList.add('speaking-highlight');
+                await speakUtterance(`${item.word}: ${item.enMeaning}`, {
+                    tokenContainerId: `card-meaning-tokens-${item.id}`,
+                    displayBannerEn: `📖 ${item.word}: "${item.enMeaning}"`,
+                    displayBannerAr: `${item.arWord}: ${item.arMeaning}`
+                });
+                if (meaningEl) meaningEl.classList.remove('speaking-highlight');
+                await new Promise(r => setTimeout(r, 400));
+            }
+
+            isAutoPlaying = false;
+            updateAutoPlayButton();
+            clearAllCardHighlights();
+        }
+
+        // ============================================================================
+        // RENDER POSTER REPLICA CARDS (ALL 14 CARDS IN 2-COLUMN WORKSHEET LAYOUT)
+        // ============================================================================
+        function tokenizeMeaningHtml(enMeaning, cardId) {
+            return enMeaning.split(' ').map((word, idx) => {
+                const cleanW = word.replace(/'/g, "\\'");
+                return `<span class="word-token" onclick="event.stopPropagation(); speakUtterance('${cleanW}', { displayBannerEn: '🔊 Word: ${cleanW}', displayBannerAr: 'نطق كلمة مفردة من المعنى الإنجليزي' })" title="اضغط لنطق هذه الكلمة بمفردها">${word}</span>`;
+            }).join(' ');
+        }
+
+        function renderPosterCards() {
+            const grid = document.getElementById('poster-cards-grid');
+            let html = '';
+
+            vocabItems.forEach((item) => {
+                const textColor = item.textDark ? 'text-slate-900' : 'text-slate-950';
+                const subTextColor = item.textDark ? 'text-slate-800' : 'text-slate-900';
+
+                html += `
+                    <article id="vocab-card-${item.id}" 
+                             onclick="playCardByMode(${item.id})"
+                             style="background-color: ${item.bgHex}; border-color: ${item.borderHex};"
+                             class="vocab-card group relative rounded-[1.75rem] border-b-4 p-4 sm:p-5 shadow-md hover:shadow-xl transition-all cursor-pointer flex items-center justify-between gap-3 overflow-hidden">
+                        
+                        <!-- Left Side: English Word + Arabic Word + English Meaning + Arabic Explanation + Action Buttons -->
+                        <div class="flex-1 z-10 text-left" dir="ltr">
+                            <!-- Top Row: English Word + Arabic Word (Exactly like the worksheet) -->
+                            <div class="flex flex-wrap items-baseline gap-2.5">
+                                <span id="card-word-${item.id}" 
+                                      onclick="event.stopPropagation(); playCardByMode(${item.id}, 'word')"
+                                      class="word-box-hl en-font text-xl sm:text-2xl font-black ${textColor} hover:underline tracking-tight transition"
+                                      title="اضغط لنطق الكلمة فقط">
+                                    ${item.word}
+                                </span>
+                                <span class="text-lg sm:text-xl font-black ${textColor}" dir="rtl">
+                                    ${item.arWord}
+                                </span>
+                            </div>
+
+                            <!-- Middle Row: English Meaning (Clickable as a whole or word-by-word) -->
+                            <div id="card-meaning-${item.id}" 
+                                 onclick="event.stopPropagation(); playCardByMode(${item.id}, 'meaning')"
+                                 class="meaning-box-hl mt-1.5 inline-block rounded-xl bg-white/35 hover:bg-white/55 px-3 py-1.5 border border-black/10 transition shadow-sm"
+                                 title="اضغط لقراءة المعنى باللغة الإنجليزية">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-volume-low text-slate-900 text-xs opacity-75"></i>
+                                    <span id="card-meaning-tokens-${item.id}" class="en-font text-base sm:text-lg font-bold ${subTextColor} leading-snug">
+                                        ${tokenizeMeaningHtml(item.enMeaning, item.id)}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Row: Arabic Meaning of the Definition (Matching worksheet) -->
+                            <div class="mt-1.5 text-sm sm:text-base font-extrabold ${subTextColor} opacity-90" dir="rtl">
+                                ${item.arMeaning}
+                            </div>
+
+                            <!-- Mini Audio Control Strip (Hidden in Print) -->
+                            <div class="no-print mt-3 pt-2 border-t border-black/10 flex flex-wrap items-center gap-1.5" dir="rtl">
+                                <button type="button" onclick="event.stopPropagation(); playCardByMode(${item.id}, 'word')" 
+                                        class="px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-slate-900 font-extrabold text-[11px] shadow-sm transition flex items-center gap-1">
+                                    <i class="fa-solid fa-volume-high text-indigo-600"></i>
+                                    <span>الكلمة</span>
+                                </button>
+                                <button type="button" onclick="event.stopPropagation(); playCardByMode(${item.id}, 'meaning')" 
+                                        class="px-2.5 py-1 rounded-lg bg-slate-900/85 hover:bg-slate-900 text-amber-300 font-extrabold text-[11px] shadow-sm transition flex items-center gap-1">
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    <span>اقرأ المعنى EN</span>
+                                </button>
+                                <button type="button" onclick="event.stopPropagation(); playCardByMode(${item.id}, 'both')" 
+                                        class="px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-emerald-800 font-extrabold text-[11px] shadow-sm transition flex items-center gap-1">
+                                    <i class="fa-solid fa-play"></i>
+                                    <span>الكلمة + المعنى</span>
+                                </button>
+                                <button type="button" onclick="spellAndReadCard(${item.id}, event)" 
+                                        class="px-2 py-1 rounded-lg bg-white/60 hover:bg-white text-slate-800 font-bold text-[11px] transition" title="تهجئة الحروف">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </button>
+                                <button type="button" onclick="event.stopPropagation(); openCardInSpotlight(${item.id})" 
+                                        class="px-2 py-1 rounded-lg bg-white/60 hover:bg-white text-purple-900 font-bold text-[11px] transition" title="تكبير البطاقة على السبورة">
+                                    <i class="fa-solid fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Custom Vector Illustration matching the worksheet card -->
+                        <div class="shrink-0 flex items-center justify-center">
+                            ${item.svg}
+                        </div>
+                    </article>
+                `;
+            });
+
+            grid.innerHTML = html;
+        }
+
+        // ============================================================================
+        // VIEW 2: SMARTBOARD SPOTLIGHT & PRONUNCIATION CHECKER
+        // ============================================================================
+        function openCardInSpotlight(id) {
+            const idx = vocabItems.findIndex(v => v.id === id);
+            if (idx !== -1) currentSpotlightIdx = idx;
+            switchView('spotlight');
+            renderSpotlight();
+            playCardByMode(vocabItems[currentSpotlightIdx].id, 'both');
+        }
+
+        function renderSpotlight() {
+            const item = vocabItems[currentSpotlightIdx];
+            document.getElementById('spotlight-counter').textContent = `${currentSpotlightIdx + 1} / ${vocabItems.length}`;
+            document.getElementById('mic-feedback-box').classList.add('hidden');
+
+            const container = document.getElementById('spotlight-card-container');
+            container.style.backgroundColor = item.bgHex;
+            container.style.borderColor = item.borderHex;
+
+            container.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex-1 space-y-4 w-full">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <span class="bg-slate-900/25 text-white px-3.5 py-1 rounded-full text-xs font-extrabold">
+                                مفردة رقم #${item.id} من 14
+                            </span>
+                            <span class="en-font bg-white/30 text-slate-900 px-3.5 py-1 rounded-full text-sm font-bold">
+                                ${item.phonetic}
+                            </span>
+                        </div>
+
+                        <!-- Giant Word + Arabic Meaning -->
+                        <div class="bg-white/90 rounded-3xl p-5 text-slate-900 shadow-lg flex flex-wrap items-center justify-between gap-4">
+                            <div dir="ltr" class="text-left">
+                                <div class="text-xs font-extrabold text-slate-400 uppercase">Vocabulary Word</div>
+                                <div class="en-font text-3xl sm:text-5xl font-black text-indigo-950">${item.word}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs font-extrabold text-slate-400">المعنى بالعربية</div>
+                                <div class="text-2xl sm:text-4xl font-black text-rose-600">${item.arWord}</div>
+                            </div>
+                            <button onclick="playCardByMode(${item.id}, 'word')" class="px-4 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow flex items-center gap-2">
+                                <i class="fa-solid fa-volume-high text-lg"></i>
+                                <span>انطق الكلمة</span>
+                            </button>
+                        </div>
+
+                        <!-- Giant English Meaning Box -->
+                        <div class="bg-slate-900/90 rounded-3xl p-5 text-white shadow-lg">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <span class="text-xs font-extrabold text-amber-300"><i class="fa-solid fa-book-open ml-1"></i>المعنى باللغة الإنجليزية (English Meaning):</span>
+                                <button onclick="playCardByMode(${item.id}, 'meaning')" class="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs transition flex items-center gap-1.5">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                    <span>استمع للمعنى الإنجليزي</span>
+                                </button>
+                            </div>
+                            <p class="en-font text-2xl sm:text-3xl font-bold text-amber-300 tracking-wide" dir="ltr">
+                                "${item.enMeaning}"
+                            </p>
+                            <p class="text-sm sm:text-base font-bold text-slate-200 mt-2">
+                                🇸🇦 شرح المعنى: ${item.arMeaning}
+                            </p>
+                        </div>
+
+                        <!-- Example Sentence -->
+                        <div class="bg-white/35 rounded-2xl p-4 text-slate-950 border border-white/40 flex flex-wrap items-center justify-between gap-3">
+                            <div>
+                                <div class="text-xs font-extrabold opacity-75">مثال تطبيقي في جملة (Example):</div>
+                                <div class="en-font text-base sm:text-lg font-bold mt-0.5" dir="ltr">${item.exampleEn}</div>
+                                <div class="text-xs sm:text-sm font-bold opacity-85 mt-0.5">${item.exampleAr}</div>
+                            </div>
+                            <button onclick="playCardByMode(${item.id}, 'example')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs shadow-sm shrink-0">
+                                <i class="fa-solid fa-play ml-1 text-emerald-600"></i>استمع للمثال
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Giant Illustration -->
+                    <div class="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl bg-white/30 border-2 border-white/50 flex items-center justify-center shrink-0 shadow-inner">
+                        <div class="scale-125 sm:scale-150">
+                            ${item.svg}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Render Sidebar List
+            const sidebar = document.getElementById('spotlight-sidebar-list');
+            sidebar.innerHTML = vocabItems.map((v, idx) => {
+                const isCurr = idx === currentSpotlightIdx;
+                return `
+                    <button onclick="currentSpotlightIdx = ${idx}; renderSpotlight(); playCardByMode(${v.id}, 'both');"
+                            class="w-full p-2.5 rounded-2xl border-2 text-right transition flex items-center justify-between gap-2 ${isCurr ? 'bg-indigo-600 border-indigo-600 text-white shadow-md' : 'bg-slate-50 border-slate-200 text-slate-800 hover:bg-indigo-50'}">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg ${isCurr ? 'bg-white text-indigo-700' : 'bg-slate-200 text-slate-700'} text-xs font-black flex items-center justify-center">${idx + 1}</span>
+                            <div>
+                                <div class="font-black text-sm">${v.arWord}</div>
+                                <div class="text-[11px] ${isCurr ? 'text-indigo-200' : 'text-slate-500'} en-font">${v.enMeaning}</div>
+                            </div>
+                        </div>
+                        <span class="en-font font-bold text-sm ${isCurr ? 'text-amber-300' : 'text-indigo-700'}">${v.word}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function nextSpotlight() {
+            currentSpotlightIdx = (currentSpotlightIdx + 1) % vocabItems.length;
+            renderSpotlight();
+            playCardByMode(vocabItems[currentSpotlightIdx].id, 'both');
+        }
+
+        function prevSpotlight() {
+            currentSpotlightIdx = (currentSpotlightIdx - 1 + vocabItems.length) % vocabItems.length;
+            renderSpotlight();
+            playCardByMode(vocabItems[currentSpotlightIdx].id, 'both');
+        }
+
+        function startPronunciationCheck(targetType) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const fbBox = document.getElementById('mic-feedback-box');
+            const item = vocabItems[currentSpotlightIdx];
+
+            if (!SpeechRecognition) {
+                fbBox.classList.remove('hidden');
+                fbBox.className = 'mt-4 p-4 rounded-2xl border-2 border-amber-300 bg-amber-50 text-amber-900 font-bold text-sm';
+                fbBox.innerHTML = `<i class="fa-solid fa-circle-info ml-1"></i>متصفحك الحالي لا يدعم ميزة التعرف الصوتي المباشر، يمكنك الاستماع وترديد الكلمة والمقارنة!`;
+                return;
+            }
+
+            const rec = new SpeechRecognition();
+            rec.lang = 'en-US';
+            rec.interimResults = false;
+
+            const targetText = targetType === 'word' ? item.word : item.enMeaning;
+            fbBox.classList.remove('hidden');
+            fbBox.className = 'mt-4 p-4 rounded-2xl border-2 border-indigo-300 bg-indigo-50 text-indigo-900 font-bold text-sm animate-pulse';
+            fbBox.innerHTML = `<i class="fa-solid fa-microphone-lines ml-2 text-rose-600"></i>تحدث الآن باللغة الإنجليزية: <span class="en-font font-black text-indigo-700">"${targetText}"</span>...`;
+
+            rec.onresult = (e) => {
+                const spoken = e.results[0][0].transcript.toLowerCase().trim();
+                const expected = targetText.toLowerCase().trim();
+                const isMatch = spoken.includes(expected) || expected.includes(spoken);
+
+                fbBox.classList.remove('animate-pulse');
+                if (isMatch) {
+                    fbBox.className = 'mt-4 p-4 rounded-2xl border-2 border-emerald-400 bg-emerald-50 text-emerald-900 font-bold text-sm';
+                    fbBox.innerHTML = `🌟 نطق ممتاز ورائع! سمعتك تقول: <span class="en-font font-black">"${spoken}"</span> ★★★★★`;
+                } else {
+                    fbBox.className = 'mt-4 p-4 rounded-2xl border-2 border-amber-300 bg-amber-50 text-amber-900 font-bold text-sm';
+                    fbBox.innerHTML = `👍 محاولة جيدة! سمعتك تقول: <span class="en-font font-black">"${spoken}"</span> — حاول مرة أخرى لنطق: <span class="en-font font-black">"${targetText}"</span>`;
+                }
+            };
+
+            rec.onerror = () => {
+                fbBox.classList.remove('animate-pulse');
+                fbBox.className = 'mt-4 p-4 rounded-2xl border-2 border-rose-200 bg-rose-50 text-rose-800 font-bold text-sm';
+                fbBox.innerHTML = `لم نتمكن من التقاط الصوت، تأكد من السماح للميكروفون وحاول مجدداً.`;
+            };
+
+            rec.start();
+        }
+
+        // ============================================================================
+        // VIEW 3: INTERACTIVE MEANING QUIZ (تحدي المعاني باللغة الإنجليزية)
+        // ============================================================================
+        function renderQuiz() {
+            const item = vocabItems[currentQuizIdx];
+            const box = document.getElementById('quiz-question-box');
+            document.getElementById('quiz-score-badge').textContent = `${quizScore} / ${vocabItems.length}`;
+
+            // Generate 4 options (1 correct + 3 distractors)
+            const options = [item];
+            for (let i = 1; options.length < 4; i++) {
+                const cand = vocabItems[(currentQuizIdx + i * 3) % vocabItems.length];
+                if (!options.some(o => o.id === cand.id)) options.push(cand);
+            }
+            // Deterministic shuffle based on currentQuizIdx
+            options.sort((a, b) => ((a.id * 7 + currentQuizIdx) % 11) - ((b.id * 7 + currentQuizIdx) % 11));
+
+            const answeredChoice = quizAnswered[item.id];
+
+            box.innerHTML = `
+                <div class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 text-white rounded-3xl p-6 sm:p-8 shadow-lg mb-6">
+                    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+                        <span class="text-xs font-extrabold bg-white/15 px-3 py-1 rounded-full">السؤال ${currentQuizIdx + 1} من ${vocabItems.length}</span>
+                        <button onclick="speakUtterance('${item.enMeaning.replace(/'/g, "\\'")}', { displayBannerEn: '📖 Meaning: ${item.enMeaning.replace(/'/g, "\\'")}' })" 
+                                class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm shadow flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high"></i>
+                            <span>اضغط للاستماع للمعنى بالإنجليزية</span>
+                        </button>
+                    </div>
+
+                    <div class="text-center py-3">
+                        <div class="text-xs font-bold text-indigo-200 mb-1">ما هي الكلمة التي تحمل هذا المعنى باللغة الإنجليزية؟</div>
+                        <div class="en-font text-2xl sm:text-4xl font-black text-amber-300 tracking-wide" dir="ltr">
+                            "${item.enMeaning}"
+                        </div>
+                        <div class="text-sm font-bold text-indigo-100 mt-2">(${item.arMeaning})</div>
+                    </div>
+                </div>
+
+                <!-- 4 Choices -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6" dir="ltr">
+                    ${options.map(opt => {
+                        let btnStyle = 'bg-slate-50 border-slate-200 hover:border-indigo-400 text-slate-800';
+                        if (answeredChoice) {
+                            if (opt.id === item.id) {
+                                btnStyle = 'bg-emerald-50 border-emerald-500 text-emerald-950 ring-2 ring-emerald-400';
+                            } else if (opt.id === answeredChoice) {
+                                btnStyle = 'bg-rose-50 border-rose-500 text-rose-950';
+                            }
+                        }
+                        return `
+                            <button onclick="submitQuizChoice(${opt.id})" ${answeredChoice ? 'disabled' : ''}
+                                    class="p-4 sm:p-5 rounded-2xl border-2 ${btnStyle} transition flex items-center justify-between gap-3 shadow-sm">
+                                <div class="text-left">
+                                    <div class="en-font text-xl sm:text-2xl font-black">${opt.word}</div>
+                                    <div class="text-xs font-bold opacity-75 mt-0.5" dir="rtl">${opt.arWord}</div>
+                                </div>
+                                <span class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-700"
+                                      onclick="event.stopPropagation(); speakUtterance('${opt.word}')">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </span>
+                            </button>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- Quiz Navigation Footer -->
+                <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                    <button onclick="if(currentQuizIdx > 0){ currentQuizIdx--; renderQuiz(); }" ${currentQuizIdx === 0 ? 'disabled' : ''}
+                            class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 font-bold text-xs sm:text-sm">
+                        السؤال السابق
+                    </button>
+                    <div class="flex gap-1">
+                        ${vocabItems.map((v, i) => `
+                            <span onclick="currentQuizIdx=${i}; renderQuiz();" class="w-2.5 h-2.5 rounded-full cursor-pointer ${i === currentQuizIdx ? 'bg-indigo-600 scale-125' : (quizAnswered[v.id] ? 'bg-emerald-500' : 'bg-slate-200')}"></span>
+                        `).join('')}
+                    </div>
+                    <button onclick="if(currentQuizIdx < vocabItems.length - 1){ currentQuizIdx++; renderQuiz(); speakUtterance(vocabItems[currentQuizIdx].enMeaning); }"
+                            class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm">
+                        السؤال التالي <i class="fa-solid fa-arrow-left mr-1"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        function submitQuizChoice(chosenId) {
+            const item = vocabItems[currentQuizIdx];
+            if (quizAnswered[item.id]) return;
+            quizAnswered[item.id] = chosenId;
+            if (chosenId === item.id) {
+                quizScore++;
+                speakUtterance(`Excellent! ${item.word} means ${item.enMeaning}`);
+            } else {
+                speakUtterance(`${item.word} means ${item.enMeaning}`);
+            }
+            renderQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuizIdx = 0;
+            quizScore = 0;
+            quizAnswered = {};
+            renderQuiz();
+        }
+
+        // ============================================================================
+        // GENERAL UI CONTROLS (MODES, SPEED, TABS)
+        // ============================================================================
+        function setReadMode(mode) {
+            currentReadMode = mode;
+            const modes = ['both', 'meaning', 'word'];
+            modes.forEach(m => {
+                const btn = document.getElementById('rm-' + m);
+                if (m === mode) {
+                    btn.className = 'px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white transition';
+                } else {
+                    btn.className = 'px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition';
+                }
+            });
+        }
+
+        function cycleSpeechRate() {
+            currentRateIdx = (currentRateIdx + 1) % speechRates.length;
+            document.getElementById('speed-label').textContent = speechRateLabels[currentRateIdx];
+        }
+
+        function switchView(viewName) {
+            stopAllSpeech();
+            ['poster', 'spotlight', 'quiz'].forEach(v => {
+                const sec = document.getElementById('view-' + v);
+                const tab = document.getElementById('tab-' + v);
+                if (v === viewName) {
+                    sec.classList.remove('hidden');
+                    sec.classList.add('block');
+                    tab.className = 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-400 text-slate-950 shadow transition flex items-center gap-1.5';
+                } else {
+                    sec.classList.add('hidden');
+                    sec.classList.remove('block');
+                    tab.className = 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5';
+                }
+            });
+
+            if (viewName === 'spotlight') renderSpotlight();
+            if (viewName === 'quiz') {
+                renderQuiz();
+                speakUtterance(vocabItems[currentQuizIdx].enMeaning);
+            }
+        }
+
+        window.onload = function () {
+            refreshVoiceList();
+            renderPosterCards();
+            renderSpotlight();
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>
